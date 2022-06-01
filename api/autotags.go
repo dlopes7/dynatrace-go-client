@@ -12,7 +12,7 @@ func (s *autoTagsService) GetAll() ([]AutoTag, *resty.Response, error) {
 
 	autoTags := new(AutoTagResponse)
 
-	apiResponse, err := s.client.Do("GET", "/api/config/v1/autoTags", nil, autoTags)
+	apiResponse, err := s.client.Do("GET", "/api/config/v1/autoTags", nil, autoTags, nil)
 
 	if err != nil {
 		return nil, apiResponse, err
@@ -30,7 +30,7 @@ func (s *autoTagsService) GetAll() ([]AutoTag, *resty.Response, error) {
 func (s *autoTagsService) Create(autoTag AutoTag) (*AutoTag, *resty.Response, error) {
 	autoTagResp := new(AutoTag)
 
-	apiResponse, err := s.client.Do("POST", "/api/config/v1/autoTags", autoTag, autoTagResp)
+	apiResponse, err := s.client.Do("POST", "/api/config/v1/autoTags", autoTag, autoTagResp, nil)
 
 	if err != nil {
 		return nil, apiResponse, err
@@ -51,7 +51,7 @@ func (s *autoTagsService) Get(ID string, includeProcessGroupReferences bool) (*A
 
 	path := fmt.Sprintf("/api/config/v1/autoTags/%s?includeProcessGroupReferences=%t", ID, includeProcessGroupReferences)
 
-	apiResponse, err := s.client.Do("GET", path, nil, autoTag)
+	apiResponse, err := s.client.Do("GET", path, nil, autoTag, nil)
 
 	if err != nil {
 		return nil, apiResponse, err
@@ -70,7 +70,7 @@ func (s *autoTagsService) Update(ID string, autoTag AutoTag) (*AutoTag, *resty.R
 	autoTagResp := new(AutoTag)
 
 	url := fmt.Sprintf("/api/config/v1/autoTags/%s", ID)
-	apiResponse, err := s.client.Do("PUT", url, autoTag, autoTagResp)
+	apiResponse, err := s.client.Do("PUT", url, autoTag, autoTagResp, nil)
 
 	if err != nil {
 		return nil, apiResponse, err
@@ -92,7 +92,7 @@ func (s *autoTagsService) Update(ID string, autoTag AutoTag) (*AutoTag, *resty.R
 func (s *autoTagsService) Delete(ID string) (*resty.Response, error) {
 
 	url := fmt.Sprintf("/api/config/v1/autoTags/%s", ID)
-	apiResponse, err := s.client.Do("DELETE", url, nil, nil)
+	apiResponse, err := s.client.Do("DELETE", url, nil, nil, nil)
 
 	if err != nil {
 		return nil, err
@@ -111,7 +111,7 @@ func (s *autoTagsService) ValidateUpdate(ID string, autoTag AutoTag) (*ErrorDeta
 
 	url := fmt.Sprintf("/api/config/v1/autoTags/%s/validator", ID)
 
-	apiResponse, err := s.client.Do("POST", url, autoTag, nil)
+	apiResponse, err := s.client.Do("POST", url, autoTag, nil, nil)
 
 	if apiResponse.StatusCode() == 400 {
 		return apiResponse.Error().(*ErrorResponse).Detail, apiResponse, err
@@ -132,7 +132,7 @@ func (s *autoTagsService) ValidateUpdate(ID string, autoTag AutoTag) (*ErrorDeta
 // ValidateCreate validates new auto tags for the `POST /autoTags` request
 func (s *autoTagsService) ValidateCreate(autoTag AutoTag) (*ErrorDetail, *resty.Response, error) {
 
-	apiResponse, err := s.client.Do("POST", "/api/config/v1/autoTags/", autoTag, nil)
+	apiResponse, err := s.client.Do("POST", "/api/config/v1/autoTags/", autoTag, nil, nil)
 
 	if apiResponse.StatusCode() == 400 {
 		return apiResponse.Error().(*ErrorResponse).Detail, apiResponse, err
