@@ -32,7 +32,7 @@ func (s *problemService) List(fields []string, problemSelector string, entitySel
 	}
 	path := fmt.Sprintf("/api/v2/problems%s", queryString)
 
-	apiResponse, err := s.client.Do("GET", path, nil, problems)
+	apiResponse, err := s.client.Do("GET", path, nil, problems, nil)
 
 	if err != nil {
 		return nil, apiResponse, err
@@ -50,7 +50,7 @@ func (s *problemService) Close(problemID string, comment string) (*resty.Respons
 
 	path := fmt.Sprintf("/api/v2/problems/%s/close", problemID)
 	pc := ProblemClose{Message: comment}
-	apiResponse, err := s.client.Do("POST", path, pc, nil)
+	apiResponse, err := s.client.Do("POST", path, pc, nil, nil)
 	if err != nil {
 		return apiResponse, err
 	}
@@ -105,7 +105,7 @@ func (s *problemService) ListV1(
 	}
 	path := fmt.Sprintf("/api/v1/problem/feed%s", queryString)
 
-	apiResponse, err := s.client.Do("GET", path, nil, problems)
+	apiResponse, err := s.client.Do("GET", path, nil, problems, nil)
 
 	if err != nil {
 		return nil, apiResponse, err

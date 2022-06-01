@@ -13,7 +13,7 @@ func (e *customDeviceService) Create(id string, cd CustomDevicePushMessage) (*Cu
 	customDevicePushResult := new(CustomDevicePushResult)
 
 	uri := fmt.Sprintf("/api/v1/entity/infrastructure/custom/%s", id)
-	apiResponse, err := e.client.Do("POST", uri, cd, customDevicePushResult)
+	apiResponse, err := e.client.Do("POST", uri, cd, customDevicePushResult, nil)
 
 	if err != nil {
 		return nil, apiResponse, err

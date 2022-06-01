@@ -22,6 +22,7 @@ type Client struct {
 	Events       *eventsService
 	CustomDevice *customDeviceService
 	Problem      *problemService
+	CustomTags   *tagService
 
 	RestyClient *resty.Client
 
@@ -90,17 +91,23 @@ func New(config Config) Client {
 	c.Events = (*eventsService)(&c.common)
 	c.CustomDevice = (*customDeviceService)(&c.common)
 	c.Problem = (*problemService)(&c.common)
+	c.CustomTags = (*tagService)(&c.common)
 
 	return c
 }
 
-func (c *Client) Do(method string, path string, body interface{}, response interface{}) (*resty.Response, error) {
+func (c *Client) Do(method string, path string, body interface{}, response interface{}, params map[string]string) (*resty.Response, error) {
+
 	r := c.RestyClient.R().
 		SetError(&ErrorResponse{}).
 		SetHeader("Content-Type", "application/json")
 
 	if body != nil {
 		r = r.SetBody(body)
+	}
+
+	if params != nil {
+		r = r.SetQueryParams(params)
 	}
 
 	if response != nil {

@@ -6,7 +6,7 @@ import "fmt"
 func (c *Client) AllApplicationNameDetectionRules() ([]NameDetectionRule, error) {
 	resp := NameDetectionResponse{}
 
-	apiResponse, err := c.Do("GET", "/api/config/v1/applicationDetectionRules", nil, &resp)
+	apiResponse, err := c.Do("GET", "/api/config/v1/applicationDetectionRules", nil, &resp, nil)
 
 	if err != nil {
 		return resp.Values, err
@@ -32,7 +32,7 @@ func (c *Client) UpdateApplicationNameDetectionRuleOrder(ids []string) error {
 		Values: rules,
 	}
 
-	apiResponse, err := c.Do("PUT", "/api/config/v1/applicationDetectionRules/order", body, nil)
+	apiResponse, err := c.Do("PUT", "/api/config/v1/applicationDetectionRules/order", body, nil, nil)
 
 	if err != nil {
 		return err
@@ -54,7 +54,7 @@ func (c *Client) GetApplicationNameDetectionRule(id string) (NameDetectionRuleDe
 		return resp, fmt.Errorf("Empty string is not a valid id")
 	}
 
-	apiResponse, err := c.Do("GET", fmt.Sprintf("/api/config/v1/applicationDetectionRules/%s", id), nil, &resp)
+	apiResponse, err := c.Do("GET", fmt.Sprintf("/api/config/v1/applicationDetectionRules/%s", id), nil, &resp, nil)
 
 	if err != nil {
 		return resp, err
@@ -77,7 +77,7 @@ func (c *Client) DeleteApplicationNameDetectionRule(id string) error {
 		return fmt.Errorf("Empty string is not a valid id")
 	}
 
-	_, err := c.Do("DELETE", fmt.Sprintf("/api/config/v1/applicationDetectionRules/%s", id), nil, nil)
+	_, err := c.Do("DELETE", fmt.Sprintf("/api/config/v1/applicationDetectionRules/%s", id), nil, nil, nil)
 
 	return err
 }
@@ -86,7 +86,7 @@ func (c *Client) DeleteApplicationNameDetectionRule(id string) error {
 func (c *Client) CreateApplicationNameDetectionRule(body NameDetectionRuleDetail) (NameDetectionRule, error) {
 	resp := NameDetectionRule{}
 
-	apiResponse, err := c.Do("POST", "/api/config/v1/applicationDetectionRules", body, &resp)
+	apiResponse, err := c.Do("POST", "/api/config/v1/applicationDetectionRules", body, &resp, nil)
 
 	if err != nil {
 		return resp, err
@@ -105,7 +105,7 @@ func (c *Client) UpdateApplicationNameDetectionRule(id string, body NameDetectio
 		return fmt.Errorf("Empty string is not a valid id")
 	}
 
-	apiResponse, err := c.Do("PUT", fmt.Sprintf("/api/config/v1/applicationDetectionRules/%s", id), body, nil)
+	apiResponse, err := c.Do("PUT", fmt.Sprintf("/api/config/v1/applicationDetectionRules/%s", id), body, nil, nil)
 
 	if err != nil {
 		return err

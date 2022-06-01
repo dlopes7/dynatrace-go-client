@@ -11,7 +11,7 @@ func (s *dashboardService) GetAll() ([]DashboardStub, *resty.Response, error) {
 
 	dashboards := new(DashboardResponse)
 
-	apiResponse, err := s.client.Do("GET", "/api/config/v1/dashboards", nil, dashboards)
+	apiResponse, err := s.client.Do("GET", "/api/config/v1/dashboards", nil, dashboards, nil)
 
 	if err != nil {
 		return nil, apiResponse, err
@@ -30,7 +30,7 @@ func (s *dashboardService) Get(ID string) (*Dashboard, *resty.Response, error) {
 	dashboard := new(Dashboard)
 	path := fmt.Sprintf("/api/config/v1/dashboards/%s", ID)
 
-	apiResponse, err := s.client.Do("GET", path, nil, dashboard)
+	apiResponse, err := s.client.Do("GET", path, nil, dashboard, nil)
 
 	if err != nil {
 		return nil, apiResponse, err
@@ -49,7 +49,7 @@ func (s *dashboardService) Create(dashboard Dashboard) (*Dashboard, *resty.Respo
 	dashboardResp := new(Dashboard)
 	path := fmt.Sprintf("/api/config/v1/dashboards")
 
-	apiResponse, err := s.client.Do("POST", path, dashboard, dashboardResp)
+	apiResponse, err := s.client.Do("POST", path, dashboard, dashboardResp, nil)
 
 	if err != nil {
 		return nil, apiResponse, err

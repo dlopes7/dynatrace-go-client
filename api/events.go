@@ -10,7 +10,7 @@ type eventsService service
 func (e *eventsService) Create(event EventCreation) (*EventStoreResult, *resty.Response, error) {
 	eventStoreResult := new(EventStoreResult)
 
-	apiResponse, err := e.client.Do("POST", "/api/v1/events", event, eventStoreResult)
+	apiResponse, err := e.client.Do("POST", "/api/v1/events", event, eventStoreResult, nil)
 
 	if err != nil {
 		return nil, apiResponse, err
