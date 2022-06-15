@@ -23,6 +23,7 @@ type Client struct {
 	CustomDevice *customDeviceService
 	Problem      *problemService
 	CustomTags   *tagService
+	Entities     *entitiesService
 
 	RestyClient *resty.Client
 
@@ -92,6 +93,7 @@ func New(config Config) Client {
 	c.CustomDevice = (*customDeviceService)(&c.common)
 	c.Problem = (*problemService)(&c.common)
 	c.CustomTags = (*tagService)(&c.common)
+	c.Entities = (*entitiesService)(&c.common)
 
 	return c
 }

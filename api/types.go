@@ -505,3 +505,12 @@ type Result struct {
 	Problems  []ProblemV1 `json:"problems"`
 	Monitored Monitored   `json:"monitored"`
 }
+
+type EnvV2Entity struct {
+	Description  string `json:"description"`
+	FirstSeenTms int64  `json:"firstSeenTms"`
+	LastSeenTms  int64  `json:"lastSeenTms"`
+	EntityID     string `json:"entityId"`
+	DisplayName  string `json:"displayName"`
+	Type         string `json:"type"`
+}
