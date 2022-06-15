@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	dynatrace "github.com/dyladan/dynatrace-go-client/api"
+	dynatrace "github.com/dlopes7/dynatrace-go-client/api"
 	log "github.com/sirupsen/logrus"
 	"os"
 )

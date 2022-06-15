@@ -1,4 +1,4 @@
-module github.com/dyladan/dynatrace-go-client
+module github.com/dlopes7/dynatrace-go-client
 
 require (
 	github.com/go-resty/resty/v2 v2.5.0
